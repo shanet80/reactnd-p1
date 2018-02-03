@@ -9,11 +9,6 @@ function ListBooks({ title, books, onShelfChange }) {
     { id: "wantToRead", display: "Want to Read" },
     { id: "read", display: "Read" }
   ];
-  const currentlyReadingShelf = books.filter(
-    book => book.shelf === "currentlyReading"
-  );
-  const readShelf = books.filter(book => book.shelf === "read");
-  const wantToReadShelf = books.filter(book => book.shelf === "wantToRead");
 
   return (
     <div className="list-books">

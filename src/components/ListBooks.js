@@ -4,6 +4,11 @@ import PropTypes from "prop-types";
 import BookShelf from "./BookShelf";
 
 function ListBooks({ title, books, onShelfChange }) {
+  const shelfList = [
+    { id: "currentlyReading", display: "Currently Reading" },
+    { id: "wantToRead", display: "Want to Read" },
+    { id: "read", display: "Read" }
+  ];
   const currentlyReadingShelf = books.filter(
     book => book.shelf === "currentlyReading"
   );
@@ -17,23 +22,17 @@ function ListBooks({ title, books, onShelfChange }) {
       </div>
       <div className="list-books-content">
         <div>
-          <BookShelf
-            title="Currently Reading"
-            books={currentlyReadingShelf}
-            onShelfChange={onShelfChange}
-          />
-
-          <BookShelf
-            title="Want to Read"
-            books={wantToReadShelf}
-            onShelfChange={onShelfChange}
-          />
-
-          <BookShelf
-            title="Read"
-            books={readShelf}
-            onShelfChange={onShelfChange}
-          />
+          {shelfList.map(shelf => {
+            let booksOnShelf = books.filter(book => book.shelf === shelf.id);
+            return (
+              <BookShelf
+                key={shelf.id}
+                title={shelf.display}
+                books={booksOnShelf}
+                onShelfChange={onShelfChange}
+              />
+            );
+          })}
         </div>
       </div>
       <div className="open-search">
